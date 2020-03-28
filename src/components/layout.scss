@@ -49,16 +49,27 @@ body {
   letter-spacing: 2px;
 }
 
+.fixedHeader {
+  @include mobile {
+    box-shadow: 0px 3px 3px -2px black;
+  }
+}
+
 .regionalDataGrid {
   display: flex;
   flex-direction: row;
   margin-top: 10em;
   overflow-y: auto;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .regionalCard {
   width: 300px;
-  box-shadow: -3px 2px 6px 0px black;
+  box-shadow: 0px 0px 3px 1px black;
   border-radius: 9px;
   padding-top: 0.2em;
   margin: 1em;
@@ -68,6 +79,12 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  @include mobile {
+    h3 {
+      font-size: 1.8em;
+    }
   }
 
   .regionalCardContainer {
@@ -107,7 +124,12 @@ body {
   font-size: 1.5em;
 
   h4 {
+    font-size: 1.2em;
     margin: 0.5em;
+
+    @include mobile {
+      margin: 0;
+    }
   }
 }
 
@@ -132,6 +154,10 @@ body {
   color: $darkTextColor;
   font-size: 1.5em;
   height: 100vh;
+
+  @include mobile {
+    font-size: 1em;
+  }
 
   .graph {
     margin-top: 3em;
@@ -175,6 +201,15 @@ body {
     flex: 1;
     padding: 2em;
     margin-bottom: 2em;
+    background-color: $darkBackground;
+
+    @include mobile {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      right: 0px;
+      box-shadow: 0px 3px 3px -2px black;
+    }
   }
 
   .locationDropDown {
@@ -199,6 +234,10 @@ body {
 
   .main {
     padding: 2em;
+
+    @include mobile {
+      margin-top: 10em;
+    }
   }
 
   .sidebar {
@@ -221,6 +260,10 @@ body {
   font-size: 1.5em;
   height: 100vh;
 
+  @include mobile {
+    font-size: 1em;
+  }
+
   .graph {
     margin-top: 3em;
 
@@ -238,6 +281,15 @@ body {
     flex: 1;
     padding: 2em;
     margin-bottom: 2em;
+    background: $lightBackground;
+
+    @include mobile {
+      position: absolute;
+      top: 0;
+      left: 0px;
+      right: 0px;
+      box-shadow: 0px 3px 3px -2px black;
+    }
   }
 
   ::placeholder {
@@ -266,5 +318,9 @@ body {
 
   .main {
     padding: 2em;
+
+    @include mobile {
+      margin-top: 10em;
+    }
   }
 }
