@@ -13,6 +13,11 @@ import RegionalCard from "../components/regionalDataCard"
 const IndexPage = () => {
   const [coronaData, setCoronaData] = useState(0)
   const [loading, setLoading] = useState(true)
+  const [searchText, setSearchInput] = useState("")
+
+  const search = event => {
+    setSearchInput(event.target.value)
+  }
   useEffect(() => {
     fetch(`${process.env.GATSBY_API_URL}/stats/latest`)
       .then(res => res.json())
@@ -23,11 +28,25 @@ const IndexPage = () => {
     <Layout>
       <div className="container">
         <div className="text-center dataCompContainer">
+          <div className="searchBar">
+            <input
+              onChange={event => search(event)}
+              placeholder="Search State"
+            />
+          </div>
           <DataComponent data={coronaData} loading={loading} />
           <div className="regionalDataGrid">
-            {coronaData?.regional?.map(reg => (
-              <RegionalCard data={reg} loading={loading} />
-            ))}
+            {coronaData?.regional?.filter(txt =>
+              txt.loc.toLowerCase().includes(searchText.toLowerCase())
+            ).length > 0 ? (
+              coronaData?.regional
+                ?.filter(txt =>
+                  txt.loc.toLowerCase().includes(searchText.toLowerCase())
+                )
+                .map(reg => <RegionalCard data={reg} loading={loading} />)
+            ) : (
+              <h1>No Match Found</h1>
+            )}
           </div>
         </div>
       </div>
