@@ -1,13 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react"
+import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faGlobe } from "@fortawesome/free-solid-svg-icons"
 
-const DataComp = ({data,loading}) => {
-  if(loading){
-    console.log('Loading',loading);
-  }else{
-    console.log(loading)
+const DataComp = ({ data, loading }) => {
+  if (loading) {
+    return <h1>Loading....</h1>
   }
   return (
     <React.Fragment>
@@ -15,32 +13,29 @@ const DataComp = ({data,loading}) => {
         className="row-flex-container"
         style={{ alignItems: "center", justifyContent: "center" }}
       >
-        <FontAwesomeIcon className="globe-space" icon={faGlobe} />
+        <h1 style={{ marginRight: "2em" }}>India</h1>
         <div
           className="row-flex-container data-items"
           style={{ alignItems: "center" }}
         >
           <div>
             <h4>Confirmed</h4>
-            <h4>{loading ? "-" : null}</h4>
-            <h4>{data?.latest?.confirmed}</h4>
+            <h4>{data?.summary?.total}</h4>
           </div>
           <div>
             <h4>Recovered</h4>
-            <h4>{data?.latest?.recovered}</h4>
+            <h4>{data?.summary?.discharged}</h4>
           </div>
           <div>
             <h4>Deaths</h4>
-            <h4>{data?.latest?.deaths}</h4>
+            <h4>{data?.summary?.deaths}</h4>
           </div>
         </div>
       </div>
     </React.Fragment>
   )
-};
+}
 
-DataComp.propTypes = {
-  
-};
+DataComp.propTypes = {}
 
-export default DataComp;
+export default DataComp

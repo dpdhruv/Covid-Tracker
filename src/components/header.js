@@ -7,10 +7,27 @@ import { ThemeContext } from "./utils/ThemeContext"
 import "./layout.scss"
 const Header = ({ siteTitle }) => (
   <ThemeContext.Consumer>
-    {(theme) => (
+    {theme => (
       <header className="header">
+        {/* <div
+          style={{
+            position: "absolute",
+            background: "red",
+            color: "black",
+            left: 0,
+            top: 0,
+            right: 0,
+            textAlign: "center",
+            fontSize: "1em",
+            fontWeight: "bold",
+            padding: "0.3em",
+          }}
+        >
+          Sorry , there is some issues with recovered patients data. It is being
+          looked upon.
+        </div> */}
         <h1 style={{ margin: 0 }}>{siteTitle}</h1>
-        <FontAwesomeIcon icon={faMoon} onClick={()=>theme.changeTheme()} />
+        <FontAwesomeIcon icon={faMoon} onClick={() => theme.changeTheme()} />
       </header>
     )}
   </ThemeContext.Consumer>
