@@ -14,12 +14,10 @@ const IndexPage = () => {
   const [coronaData, setCoronaData] = useState(0)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    console.log("loading", loading)
     fetch(`${process.env.GATSBY_API_URL}/stats/latest`)
       .then(res => res.json())
       .then(res => setCoronaData(res.data))
     setLoading(false)
-    console.log("loading", loading)
   }, [])
   return (
     <Layout>
@@ -28,7 +26,7 @@ const IndexPage = () => {
           <DataComponent data={coronaData} loading={loading} />
           <div className="regionalDataGrid">
             {coronaData?.regional?.map(reg => (
-              <RegionalCard data={reg} />
+              <RegionalCard data={reg} loading={loading} />
             ))}
           </div>
         </div>

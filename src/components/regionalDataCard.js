@@ -1,5 +1,8 @@
 import React from "react"
-const regionalDataCard = ({ data }) => {
+const regionalDataCard = ({ data, loading }) => {
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
   return (
     <div className="regionalCard">
       <div className="regionalCardContainer">
