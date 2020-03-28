@@ -5,47 +5,50 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React , {Component} from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-
+import { ThemeContext } from "./utils/ThemeContext"
 import Header from "./header"
-import "./layout.css"
+import "./layout.scss"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
+
+class Layout extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      theme: "dark",
+      changeTheme: this.changeTheme,       
     }
-  `)
+  }
+  
+  changeTheme = () =>{
+    this.setState({
+      ...this.state,
+      theme: this.state.theme==='dark'?'light':'dark',
+    })
+  }
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
+
+
+  render() {
+    const {children} = this.props;
+    return (
+      <ThemeContext.Provider value={this.state}>
+        <div className={`base-${this.state.theme}`}>
+          <Header siteTitle="Corona Tracker" />
+          <div className="main">{children}</div>
+        </div>
+      </ThemeContext.Provider>
+    )
+  }
 }
+
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default Layout;
